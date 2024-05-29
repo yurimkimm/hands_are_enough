@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선택 완료</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #fff4fb;
+      }
+      .container {
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 600px;
+        background-color: #fff4fb;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      h1 {
+        margin-top: 20px;
+      }
+      .image-container {
+        margin-top: 20px;
+      }
+      .image-container img {
+        width: 50%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 10px;
+      }
+      p {
+        font-size: 18px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>선택 완료!</h1>
+      <div class="image-container">
+        <img id="selectedImage" src="" alt="선택된 손 사진" />
+      </div>
+      <p>선택한 상대에게 메세지를 전달했습니다.</p>
+    </div>
+
+    <script>
+      // URL 파라미터에서 이미지 소스 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const imageSrc = urlParams.get("image");
+
+      // 이미지 소스 설정
+      if (imageSrc) {
+        document.getElementById("selectedImage").src = imageSrc;
+      } else {
+        document.getElementById("selectedImage").alt =
+          "이미지를 찾을 수 없습니다.";
+      }
+    </script>
+  </body>
+</html>

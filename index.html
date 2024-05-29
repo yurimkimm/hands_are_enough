@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>매디컬 앱</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff;
+      }
+      .app-name {
+        font-size: 45px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .logo {
+        width: 200px;
+        margin-bottom: 50px;
+      }
+      .button-container {
+        display: flex;
+        gap: 20px;
+      }
+      .button {
+        padding: 15px 30px;
+        font-size: 18px;
+        color: #fff;
+        background-color: rgb(251, 141, 159);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: rgb(251, 141, 159);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-name">HandMatch</div>
+    <img src="logo1.png" alt="로고" class="logo" />
+    <div class="button-container">
+      <button class="button" onclick="startTest('quick')">시작하기</button>
+    </div>
+    <script>
+      function startTest(type) {
+        if (type === "precision") {
+          window.location.href = "precision_test.html";
+        } else if (type === "quick") {
+          window.location.href = "nextpage.html";
+        }
+      }
+    </script>
+  </body>
+</html>

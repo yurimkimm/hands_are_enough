@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>매디컬 앱 - 예측 결과</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #fff4fb;
+      }
+      .content {
+        text-align: center;
+      }
+      .content h1 {
+        color: #000000;
+      }
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+      .button-container {
+        margin-top: 20px;
+      }
+      .button-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: rgb(251, 141, 159);
+        color: white;
+      }
+      .button-container button:hover {
+        background-color: rgb(251, 141, 159);
+      }
+      .hand-image {
+        max-width: 50%;
+        height: auto;
+        margin-top: 20px;
+      }
+      #loadingScreen {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loadingScreen">두근두근...</div>
+    <div class="content">
+      <h1>예측 결과</h1>
+      <img id="handImage" class="hand-image" src="" alt="Hand Image" />
+      <div class="result">
+        <p>성별: <span id="gender">남</span></p>
+        <p>신장: <span id="height">170cm대</span></p>
+        <p>체중: <span id="weight">60kg대</span></p>
+      </div>
+      <div class="button-container">
+        <button onclick="showLoadingAndRedirect()">
+          나와 어울리는 상대는?
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const imageUrl = sessionStorage.getItem("handImage");
+        if (!imageUrl) {
+          alert("손사진이 없습니다. 다시 시도해주세요.");
+          window.location.href = "nextpage.html";
+          return;
+        }
+
+        document.getElementById("handImage").src = imageUrl;
+      });
+
+      function showLoadingAndRedirect() {
+        document.getElementById("loadingScreen").style.display = "flex";
+        setTimeout(function () {
+          window.location.href = "dating.html";
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

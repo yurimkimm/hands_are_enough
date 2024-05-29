@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>매디컬 앱 - 건강상태</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #e0f7fa;
+      }
+      .content {
+        text-align: center;
+      }
+      .content h1 {
+        color: #007bff;
+      }
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+      .advice {
+        margin-top: 20px;
+        text-align: left;
+        font-size: 18px;
+      }
+      .advice h2 {
+        color: #007bff;
+        text-align: center;
+      }
+      .advice ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>건강상태</h1>
+      <div class="result">
+        <p>BMI 지수: <span id="bmi"></span></p>
+        <p>BMR 지수: <span id="bmr"></span></p>
+        <p>이상적인 체중: <span id="idealWeight"></span></p>
+      </div>
+      <div class="advice">
+        <div></div>
+        <h2>건강 조언</h2>
+        <ul>
+          <li>
+            <strong>균형 잡힌 식단</strong>: 하루에 필요한 칼로리(1441.25
+            kcal/day ~ 1596.25 kcal/day)를 기준으로, 균형 잡힌 식단을
+            유지하세요. 모든 주요 영양소(탄수화물, 단백질, 지방)와 비타민,
+            미네랄이 포함된 식사를 하세요. 과일, 채소, 통곡물, 단백질이 풍부한
+            식품(닭고기, 생선, 두부 등)을 포함하세요.
+          </li>
+          <li>
+            <strong>적절한 운동</strong>: 주 3~5회, 30분 이상 유산소 운동(조깅,
+            자전거 타기, 수영 등)을 하세요. 근력 운동(웨이트 트레이닝, 필라테스
+            등)도 주 2~3회 병행하여 근육량을 유지하고 신진대사를 촉진하세요.
+          </li>
+          <li>
+            <strong>수면</strong>: 충분한 수면(하루 7~9시간)을 취하세요. 수면은
+            신체 회복과 전반적인 건강에 매우 중요합니다.
+          </li>
+          <li>
+            <strong>수분 섭취</strong>: 하루 8잔(약 2리터)의 물을 마시세요.
+            수분은 신진대사와 소화에 필수적입니다.
+          </li>
+          <li>
+            <strong>스트레스 관리</strong>: 요가, 명상, 심호흡 운동 등 스트레스
+            관리 기법을 활용하세요. 스트레스는 신체 건강에 부정적인 영향을 미칠
+            수 있습니다.
+          </li>
+          <li>
+            <strong>정기 건강검진</strong>: 정기적으로 건강검진을 받아 건강
+            상태를 점검하고 필요한 조치를 취하세요.
+          </li>
+          <li>
+            <strong>흡연과 음주</strong>: 흡연을 피하고, 음주를 제한하세요. 이는
+            장기적으로 건강에 매우 유익합니다.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // BMI 계산 결과
+        const bmi = "18.52 ~ 24.22";
+        document.getElementById("bmi").textContent = bmi;
+
+        // BMR 계산 결과
+        const bmr = "1441.25 kcal/day ~ 1596.25 kcal/day";
+        document.getElementById("bmr").textContent = bmr;
+
+        // 이상적인 체중 계산 결과
+        const idealWeight = "63.0kg ~ 72.0kg";
+        document.getElementById("idealWeight").textContent = idealWeight;
+      });
+    </script>
+  </body>
+</html>

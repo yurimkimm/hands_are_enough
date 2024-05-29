@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>160cm대 키를 가진 여자분들이에요!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #fff4fb;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+      }
+      h1 {
+        margin: 20px 0;
+      }
+      .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .card {
+        min-width: 200px;
+        margin: 10px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        cursor: pointer;
+        flex: 0 0 auto;
+      }
+      .card img {
+        width: 80px;
+        height: auto;
+        border-radius: 10px;
+      }
+      .controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+      }
+      .button {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>160cm대 키를 가진 여자분들이에요!</h1>
+    <div class="container">
+      <div class="slider" id="slider">
+        <div
+          class="card"
+          onclick="location.href='matching.html?image=hand1.jpeg'"
+        >
+          <img src="hand1.jpeg" alt="손 사진" />
+
+          <p>몸무게: 50kg대</p>
+        </div>
+        <div
+          class="card"
+          onclick="location.href='matching.html?image=hand2.jpeg'"
+        >
+          <img src="hand2.jpeg" alt="손 사진" />
+
+          <p>몸무게: 60kg대</p>
+        </div>
+        <div
+          class="card"
+          onclick="location.href='matching.html?image=hand3.jpeg'"
+        >
+          <img src="hand3.jpeg" alt="손 사진" />
+
+          <p>몸무게: 90kg대</p>
+        </div>
+        <!-- 추가 카드들 -->
+        <div
+          class="card"
+          onclick="location.href='matching.html?image=hand4.jpeg'"
+        >
+          <img src="hand4.jpeg" alt="손 사진" />
+
+          <p>몸무게: 50kg대</p>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="button" id="prevBtn">&#10094;</button>
+        <button class="button" id="nextBtn">&#10095;</button>
+      </div>
+    </div>
+
+    <script>
+      const slider = document.getElementById("slider");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        const slides = document.querySelectorAll(".card");
+        const totalSlides = slides.length;
+        if (index >= totalSlides) {
+          currentSlide = 0;
+        } else if (index < 0) {
+          currentSlide = totalSlides - 1;
+        } else {
+          currentSlide = index;
+        }
+        const newTransform = -currentSlide * slides[0].clientWidth;
+        slider.style.transform = `translateX(${newTransform}px)`;
+      }
+
+      prevBtn.addEventListener("click", () => {
+        showSlide(currentSlide - 1);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        showSlide(currentSlide + 1);
+      });
+
+      // 초기 슬라이드 설정
+      showSlide(currentSlide);
+    </script>
+  </body>
+</html>

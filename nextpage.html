@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>매디컬 앱 - 손사진 촬영</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #fff4fb;
+      }
+      .content {
+        text-align: center;
+      }
+      .content h1 {
+        color: #000000;
+      }
+      .content p {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .button-container button,
+      .button-container input {
+        margin: 10px 0;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .button-container button {
+        background-color: rgb(251, 141, 159);
+        color: white;
+      }
+      .button-container button:hover {
+        background-color: rgb(251, 141, 159);
+      }
+      .button-container input {
+        background-color: #ffffff;
+      }
+      .preview-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      #preview {
+        max-width: 50%;
+        height: auto;
+        display: none;
+      }
+      .result-button {
+        display: none;
+        margin-top: 20px;
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: rgb(251, 141, 159);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .result-button:hover {
+        background-color: rgb(251, 141, 159);
+      }
+      .loading {
+        display: none;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>손사진 촬영</h1>
+      <p>손사진은 수직 20-30cm위에서 손등을 촬영해주세요.</p>
+      <div class="button-container">
+        <button onclick="capturePhoto()">사진 촬영</button>
+        <input type="file" accept="image/*" onchange="uploadPhoto(event)" />
+      </div>
+      <div class="preview-container">
+        <img id="preview" src="" alt="Preview" />
+        <button class="result-button" onclick="goToResultPage()">
+          결과 확인
+        </button>
+      </div>
+    </div>
+    <div class="loading" id="loading">
+      <p>로딩 중…</p>
+    </div>
+    <script>
+      let capturedImage = "";
+
+      function capturePhoto() {
+        const constraints = {
+          video: {
+            facingMode: "environment",
+          },
+        };
+
+        navigator.mediaDevices
+          .getUserMedia(constraints)
+          .then(function (stream) {
+            const video = document.createElement("video");
+            video.srcObject = stream;
+            video.play();
+
+            const button = document.createElement("button");
+            button.textContent = "캡처";
+            button.onclick = function () {
+              const canvas = document.createElement("canvas");
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const context = canvas.getContext("2d");
+              context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+              const preview = document.getElementById("preview");
+              preview.src = canvas.toDataURL("image/png");
+              capturedImage = canvas.toDataURL("image/png");
+              preview.style.display = "block";
+
+              document.querySelector(".result-button").style.display = "block";
+
+              stream.getTracks().forEach((track) => track.stop());
+              document.body.removeChild(video);
+              document.body.removeChild(button);
+            };
+
+            document.body.appendChild(video);
+            document.body.appendChild(button);
+          })
+          .catch(function (error) {
+            console.error("Error accessing camera:", error);
+          });
+      }
+
+      function uploadPhoto(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const preview = document.getElementById("preview");
+          preview.src = e.target.result;
+          capturedImage = e.target.result;
+          preview.style.display = "block";
+
+          document.querySelector(".result-button").style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function goToResultPage() {
+        if (capturedImage) {
+          sessionStorage.setItem("handImage", capturedImage);
+          document.querySelector(".content").style.display = "none";
+          document.getElementById("loading").style.display = "block";
+          setTimeout(function () {
+            window.location.href = "resultpage.html";
+          }, 3000);
+        } else {
+          alert("사진을 촬영하거나 업로드 해주세요.");
+        }
+      }
+    </script>
+  </body>
+</html>
